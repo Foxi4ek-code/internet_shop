@@ -1,0 +1,93 @@
+{
+  "system": {
+    "name": "Система рекомендаций для интернет-магазина обоев",
+    "version": "1.0.0",
+    "description": "Гибридная система рекомендаций на основе коллаборативной фильтрации и контентного анализа",
+    "author": "Дипломный проект",
+    "created": "2026-06-16"
+  },
+  "api": {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "debug": true,
+    "title": "Recommendation System API",
+    "version": "1.0"
+  },
+  "cors": {
+    "allow_origins": ["*"],
+    "allow_credentials": true,
+    "allow_methods": ["*"],
+    "allow_headers": ["*"]
+  },
+  "models": {
+    "item_cf": {
+      "name": "Item-based Collaborative Filtering",
+      "k_neighbors": 20,
+      "weight": 0.6
+    },
+    "content_based": {
+      "name": "Content-based Recommender",
+      "weight": 0.4
+    },
+    "hybrid": {
+      "name": "Hybrid Recommender",
+      "fallback_method": "popular_items"
+    }
+  },
+  "data": {
+    "products_source": "products.json",
+    "synthetic_data": {
+      "enabled": true,
+      "n_users": 500,
+      "n_interactions": 5000
+    },
+    "train_test_split": 0.2
+  },
+  "caching": {
+    "enabled": false,
+    "backend": "redis",
+    "host": "localhost",
+    "port": 6379,
+    "ttl": {
+      "personalized_recommendations": 3600,
+      "similar_items": 86400,
+      "popular_items": 3600
+    }
+  },
+  "evaluation": {
+    "metrics": [
+      "precision@10",
+      "recall@10",
+      "coverage",
+      "novelty",
+      "diversity",
+      "response_time"
+    ],
+    "test_users": 100,
+    "n_recommendations": 10
+  },
+  "frontend": {
+    "api_url": "http://localhost:8000",
+    "recommendations": {
+      "personalized": {
+        "n": 10,
+        "container_id": "recommendations-container",
+        "title": "Рекомендовано для вас"
+      },
+      "similar": {
+        "n": 6,
+        "container_id": "similar-items-container",
+        "title": "Похожие товары"
+      },
+      "popular": {
+        "n": 10,
+        "container_id": "popular-items-container",
+        "title": "Популярные обои"
+      }
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  }
+}

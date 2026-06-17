@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Интернет-магазин Дом обоев</title>
+        <link rel="stylesheet" href="styles.css">
+        
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+        
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    </head>
+    <body>
+        <header>
+            <a href="#" class="logo-link">
+                <img src="logo.webp" alt="Дом обоев" class="logo">
+            </a>
+            <nav class="menu-container">
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#products">Товары</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="home">
+                <h2>Добро пожаловать в "Дом обоев"!</h2>
+                <img src="mag.webp" alt="Вид нашего магазина" class="store-image">
+                <p id="desc_head">Мы предлагаем широкий выбор качественных обоев для создания уютного и стильного интерьера в вашем доме. В нашем магазине вы найдете обои на любой вкус и кошелек. Мы работаем только с проверенными поставщиками и гарантируем высокое качество нашей продукции.</p>
+
+                <div class="advantages">
+                    <div class="advantage">
+                        <h3>Широкий ассортимент</h3>
+                        <p>В нашем каталоге представлено более 1000 видов обоев различных цветов, фактур и стилей.</p>
+                    </div>
+                    <div class="advantage">
+                        <h3>Выгодные цены</h3>
+                        <p>Мы предлагаем конкурентные цены и регулярные скидки на самые популярные коллекции.</p>
+                    </div>
+                    <div class="advantage">
+                        <h3>Быстрая доставка</h3>
+                        <p>Мы осуществляем быструю доставку по всей стране. Возможен самовывоз из нашего магазина.</p>
+                    </div>
+                </div>
+            </section>
+            <section id="products">
+                <h2>Наши товары</h2>
+                <div class="filters-container">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Поиск по названию...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="priceFilter">Цена:</label>
+                        <select id="priceFilter">
+                            <option value="all">Все цены</option>
+                            <option value="0-2000">0 - 2000 руб</option>
+                            <option value="2000-5000">2000 - 5000 руб</option>
+                            <option value="5000-10000">5000 - 10000 руб</option>
+                            <option value="10000+">10000+ руб</option>
+                        </select>
+                        <label for="materialFilter">Материал:</label>
+                        <select id="materialFilter">
+                            <option value="all">Все материалы</option>
+                            <option value="Флизелин">Флизелин</option>
+                            <option value="Бумага">Бумага</option>
+                        </select>
+                        <label for="manufacturerFilter">Производитель:</label>
+                        <select id="manufacturerFilter">
+                            <option value="all">Все производители</option>
+                            <option value="Palitra">Palitra</option>
+                            <option value="Аспект">Аспект</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="products-container">
+                </div>
+            </section>
+
+            <section id="popular-section">
+                <div id="popular-items-container" class="recommendations-section">
+                </div>
+            </section>
+
+            <section id="recommendations-section">
+                <div id="recommendations-container" class="recommendations-section">
+                </div>
+            </section>
+            <section id="wallpaperCalculatorPage">
+                <h2>Калькулятор расчета обоев</h2>
+                <p>Выберите понравившиеся обои из каталога, чтобы рассчитать необходимое количество рулонов.</p>
+
+                <div class="calculator-controls">
+                    <div class="calc-input-group">
+                        <label for="calculatorSelectProduct">Выберите обои:</label>
+                        <select id="calculatorSelectProduct">
+                            <option value="">-- Выберите товар --</option>
+                        </select>
+                    </div>
+
+                    <div class="calc-input-group">
+                        <label for="calcRoomLength">Длина комнаты (м):</label>
+                        <input type="number" id="calcRoomLength" min="1" step="0.1" value="5">
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="calcRoomWidth">Ширина комнаты (м):</label>
+                        <input type="number" id="calcRoomWidth" min="1" step="0.1" value="4">
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="calcRoomHeight">Высота комнаты (м):</label>
+                        <input type="number" id="calcRoomHeight" min="2" step="0.1" value="2.7">
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="calcWindowArea">Площадь окон и дверей (кв.м.):</label>
+                        <input type="number" id="calcWindowArea" min="0" step="0.1" value="5">
+                    </div>
+                    
+                    <button id="fullCalculateButton">Рассчитать</button>
+
+                    <div class="calc-result-page">
+                        <p>Количество рулонов: <strong id="calculatedRollsPage">0</strong></p>
+                        <p class="note">Рекомендуем брать на 1 рулон больше про запас.</p>
+                    </div>
+                </div>
+
+                <div id="wallpaperDetailsDisplay">
+                </div>
+
+            </section>
+            <section id="checkout" class="hidden">
+                <h2>Оформление заказа</h2>
+                <form id="orderForm">
+                    <h3>Контактная информация</h3>
+                    <div class="form-group">
+                        <label for="customerName">Ваше имя:</label>
+                        <input type="text" id="customerName" name="customerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerEmail">Email:</label>
+                        <input type="email" id="customerEmail" name="customerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">Телефон:</label>
+                        <input type="tel" id="customerPhone" name="customerPhone" required>
+                    </div>
+
+                    <h3>Доставка</h3>
+                    <div class="form-group">
+                        <label for="deliveryMethod">Способ доставки:</label>
+                        <select id="deliveryMethod" name="deliveryMethod" required>
+                            <option value="">Выберите способ доставки</option>
+                            <option value="pickup">Самовывоз</option>
+                            <option value="courier">Курьерская доставка</option>
+                            <option value="почта">Почта России</option>
+                        </select>
+                    </div>
+                    <div class="form-group delivery-address" style="display: none;"> 
+                        <label for="deliveryAddress">Адрес доставки:</label>
+                        <input type="text" id="deliveryAddress" name="deliveryAddress">
+                    </div>
+
+                    <h3>Оплата</h3>
+                    <div class="form-group">
+                        <label for="paymentMethod">Способ оплаты:</label>
+                        <select id="paymentMethod" name="paymentMethod" required>
+                            <option value="">Выберите способ оплаты</option>
+                            <option value="online">Онлайн-оплата картой</option>
+                            <option value="upon_receipt">Оплата при получении</option>
+                        </select>
+                    </div>
+
+                    <h3>Комментарий к заказу</h3>
+                    <div class="form-group">
+                        <label for="orderComment">Комментарий:</label>
+                        <textarea id="orderComment" name="orderComment"></textarea>
+                    </div>
+
+                    <div class="order-summary">
+                        <p><strong>Итого к оплате: <span id="checkoutTotal"></span></strong></p>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit-order">Подтвердить заказ</button>
+                        <button type="button" class="btn-cancel-order">Отмена</button>
+                    </div>
+                </form>
+            </section>
+            <section id="contact">
+                <h2 id="contacts">Контакты</h2>
+                <form id="contact-form">
+                    <label for="name">Имя:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="message">Сообщение:</label>
+                    <textarea id="message" name="message" required></textarea>
+                    
+                    <button type="submit">Отправить</button>
+                </form>
+
+                <div class="telegram-support">
+                    <p>Или свяжитесь с нами через Telegram:</p>
+                    <a href="https://t.me/f4k213bot" target="_blank" class="telegram-bot-link">
+                        <img src="Telegram_logo.svg.webp" alt="Telegram Support">
+                        <span>Написать в Telegram</span>
+                    </a>
+                </div>
+
+                <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+                <script>
+                    (function(){
+                        emailjs.init("lx6Wh_rvJuF5DI6_P");
+                    })();
+
+                    document.getElementById('contact-form').addEventListener('submit', function(event) {
+                        event.preventDefault();
+
+                        const form = this;
+
+                        emailjs.sendForm('service_kp6t6b9', 'template_zm02zvf', this)
+                            .then(function() {
+                                Toastify({
+                                    text: "Сообщение отправлено!",
+                                    duration: 3000,
+                                    gravity: "top",
+                                    position: "center",
+                                    backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                                    stopOnFocus: true
+                                }).showToast();
+                                form.reset();
+                            }, function(error) {
+                                Toastify({
+                                    text: "Ошибка отправки сообщения: " + error.message,
+                                    duration: 5000,
+                                    gravity: "top",
+                                    position: "center",
+                                    backgroundColor: "linear-gradient(to right, #f5222d, #ff4d4f)",
+                                    stopOnFocus: true
+                                }).showToast();
+                            });
+                    });
+                </script>
+            </section>
+            <div id="quickViewModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-button">&times;</span>
+                    <div class="modal-body">
+                        <div class="modal-image-container">
+                            <img id="modalProductImage" src="" alt="Изображение товара">
+                        </div>
+                        <div class="modal-details">
+                            <h3 id="modalProductName"></h3>
+                            <p id="modalProductDescription"></p>
+                            <p class="modal-price" id="modalProductPrice"></p>
+                            
+                            <div class="modal-actions">
+                                <div class="add-to-cart-modal" data-name="" data-price="">
+                                    <button class="minus-modal">-</button>
+                                    <span class="quantity-modal">0</span>
+                                    <button class="plus-modal">+</button>
+                                </div>
+                            </div>
+
+                            <div id="similarProductsSection" class="similar-products-modal">
+                                <h4>Похожие товары</h4>
+                                <div id="similarProductsContainer" class="similar-products-grid">
+                                    <div class="loading-similar">Загрузка похожих товаров...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+        <footer>
+            <div class="footer-inner">
+                <p>&copy; 2025 Интернет-магазин. Все права защищены.</p>
+                <p class="made-by">Made by Foxi4ek</p>
+            </div>
+        </footer>
+
+        <button class="cart-button"></button>
+
+        <div class="cart">
+
+            <div class="cart-header">
+                <h4>Корзина</h4>
+                <button class="cart-close-button">&times;</button>
+            </div>
+
+            <div class="cart-delivery">
+                Доставка 0.00
+                <div class="delivery-progress-bar"></div>
+            </div>
+
+            <div class="cart-items">
+            </div>
+
+            <div class="cart-footer">
+                <p id="total">Итого: 0 руб</p>
+                <button class="checkout-button">Оформить заказ • 0 руб</button>
+            </div>
+
+        </div>
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+        <script src="recommendations.js"></script>
+
+        <script>
+            let cart = [];
+            let allProducts = [];
+            
+            const cartItemsContainer = document.querySelector('.cart-items');
+            const totalElement = document.getElementById('total');
+            const cartElement = document.querySelector('.cart');
+            const cartButton = document.querySelector('.cart-button');
+            const cartCloseButton = document.querySelector('.cart-close-button');
+            const checkoutButton = document.querySelector('.checkout-button');
+            const productsContainer = document.querySelector('.products-container');
+            
+            const searchInput = document.getElementById('searchInput');
+            const priceFilter = document.getElementById('priceFilter');
+            const materialFilter = document.getElementById('materialFilter');
+            const manufacturerFilter = document.getElementById('manufacturerFilter');
+
+            const checkoutSection = document.getElementById('checkout');
+            const cancelButton = checkoutSection.querySelector('.btn-cancel-order');
+            const orderForm = document.getElementById('orderForm');
+            const customerNameInput = document.getElementById('customerName');
+            const customerEmailInput = document.getElementById('customerEmail');
+            const customerPhoneInput = document.getElementById('customerPhone');
+            const deliveryMethodSelect = document.getElementById('deliveryMethod');
+            const deliveryAddressGroup = document.querySelector('.delivery-address');
+            const deliveryAddressInput = document.getElementById('deliveryAddress');
+            const paymentMethodSelect = document.getElementById('paymentMethod');
+            const orderCommentTextarea = document.getElementById('orderComment');
+            const checkoutTotalSpan = document.getElementById('checkoutTotal');
+
+            const quickViewModal = document.getElementById('quickViewModal');
+            const modalCloseButton = quickViewModal.querySelector('.close-button');
+            const modalProductImage = document.getElementById('modalProductImage');
+            const modalProductName = document.getElementById('modalProductName');
+            const modalProductDescription = document.getElementById('modalProductDescription');
+            const modalProductPrice = document.getElementById('modalProductPrice');
+            const modalAddToCartDiv = quickViewModal.querySelector('.add-to-cart-modal'); 
+            const modalMinusButton = modalAddToCartDiv.querySelector('.minus-modal');
+            const modalPlusButton = modalAddToCartDiv.querySelector('.plus-modal');
+            const modalQuantitySpan = modalAddToCartDiv.querySelector('.quantity-modal');
+
+            const calculatorPageSection = document.getElementById('wallpaperCalculatorPage');
+            const calculatorSelectProduct = document.getElementById('calculatorSelectProduct');
+            const calcRoomLengthInput = document.getElementById('calcRoomLength');
+            const calcRoomWidthInput = document.getElementById('calcRoomWidth');
+            const calcRoomHeightInput = document.getElementById('calcRoomHeight');
+            const calcWindowAreaInput = document.getElementById('calcWindowArea');
+            const fullCalculateButton = document.getElementById('fullCalculateButton');
+            const calculatedRollsPageDisplay = document.getElementById('calculatedRollsPage');
+            const wallpaperDetailsDisplay = document.getElementById('wallpaperDetailsDisplay');
+
+
+        function openQuickViewModal(product) {
+            modalProductImage.src = product.image;
+            modalProductImage.alt = product.name;
+            modalProductName.textContent = product.name;
+            modalProductPrice.textContent = `${product.price} руб/шт`;
+
+            let detailsHTML = `
+                <h4>Описание</h4>
+                <p>${product.description}</p>
+                <hr>
+                <h4>Детали товара</h4>
+                <p><strong>Материал:</strong> ${product.material || 'Не указан'}</p>
+                <p><strong>Цвет:</strong> ${product.color || 'Не указан'}</p>
+                <p><strong>Стиль:</strong> ${product.style || 'Не указан'}</p>
+                <hr>
+                <p><strong>Размеры рулона:</strong> ${product.rollLength ? `${product.rollLength}м x ${product.rollWidth || '?'}` : 'Не указаны'}</p>
+                ${product.rapportHeight !== undefined ? `<p><strong>Раппорт:</strong> ${product.rapportHeight}м</p>` : ''}
+            `;
+            const modalDescriptionElement = quickViewModal.querySelector('#modalProductDescription');
+            if (modalDescriptionElement) {
+                modalDescriptionElement.innerHTML = detailsHTML; 
+            }
+
+            addSimilarProductsToModal(product);
+
+            modalAddToCartDiv.dataset.name = product.name;
+            modalAddToCartDiv.dataset.price = product.price;
+
+            const itemInCart = cart.find(item => item.name === product.name);
+            modalQuantitySpan.textContent = itemInCart ? itemInCart.quantity : 0;
+
+            quickViewModal.style.display = 'block';
+        }
+
+        function addSimilarProductsToModal(currentProduct) {
+            const similarContainer = document.getElementById('similarProductsContainer');
+
+            const similarProducts = allProducts.filter(p => {
+                if (p.name === currentProduct.name) return false;
+
+                return (p.material === currentProduct.material || 
+                        p.style === currentProduct.style || 
+                        p.color === currentProduct.color);
+            }).slice(0, 6);
+
+            if (similarProducts.length === 0) {
+                similarContainer.innerHTML = '<div class="loading-similar">Похожих товаров не найдено</div>';
+                return;
+            }
+
+            similarContainer.innerHTML = similarProducts.map(p => `
+                <div class="similar-product-item" data-product-name="${p.name}">
+                    <img src="${p.image}" alt="${p.name}">
+                    <div class="similar-product-item-name">${p.name}</div>
+                    <div class="similar-product-item-price">${p.price} руб</div>
+                </div>
+            `).join('');
+
+            document.querySelectorAll('.similar-product-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const productName = this.dataset.productName;
+                    const product = allProducts.find(p => p.name === productName);
+                    if (product) {
+                        openQuickViewModal(product);
+                    }
+                });
+            });
+        }
+
+            document.addEventListener('click', function(e) {
+                const btn = e.target.closest('.details-open-btn');
+                if (btn) {
+                    e.stopPropagation();
+                    const productName = btn.dataset.productName;
+                    const product = allProducts.find(p => p.name === productName);
+                    if (product) {
+                        openQuickViewModal(product);
+                    }
+                }
+            });
+
+            function closeQuickViewModal() {
+                quickViewModal.style.display = 'none';
+            }
+
+            modalCloseButton.addEventListener('click', closeQuickViewModal);
+
+            window.addEventListener('click', (event) => {
+                if (event.target == quickViewModal) {
+                    closeQuickViewModal();
+                }
+            });
+
+            productsContainer.addEventListener('click', (event) => {
+                const card = event.target.closest('.product'); 
+                if (card) {
+                    const productName = card.dataset.productName;
+                    const product = allProducts.find(p => p.name === productName);
+                    if (product) {
+                        openQuickViewModal(product);
+                    }
+                }
+            });
+            
+            modalAddToCartDiv.addEventListener('click', (event) => {
+                const target = event.target;
+                const productName = modalAddToCartDiv.dataset.name;
+                const productPrice = +modalAddToCartDiv.dataset.price;
+
+                if (target.classList.contains('plus-modal')) {
+                    addToCart(productName, productPrice);
+                } else if (target.classList.contains('minus-modal')) {
+                    removeFromCart(productName);
+                }
+            });
+
+            function calculateWallpaperRolls(roomLength, roomWidth, roomHeight, windowArea, rollLength, rollWidth, rapportHeight) {
+                const perimeter = (roomLength + roomWidth) * 2;
+                const totalWallArea = perimeter * roomHeight;
+                const wallpaperArea = totalWallArea - windowArea;
+
+                if (wallpaperArea <= 0) return 0;
+
+                const rollArea = rollLength * rollWidth;
+                
+                const stripsPerRoll = Math.floor((rollLength + rapportHeight) / (roomHeight + rapportHeight));
+                
+                if (stripsPerRoll <= 0) return 0; 
+
+                const totalStripsNeeded = Math.ceil(wallpaperArea / (stripsPerRoll * rollWidth));
+                const rollsNeeded = Math.ceil(totalStripsNeeded / stripsPerRoll);
+
+                return rollsNeeded;
+            }
+
+            function updateCalculatorPageResult(product) {
+                const roomLength = parseFloat(calcRoomLengthInput.value);
+                const roomWidth = parseFloat(calcRoomWidthInput.value);
+                const roomHeight = parseFloat(calcRoomHeightInput.value);
+                const windowArea = parseFloat(calcWindowAreaInput.value);
+
+                if (!product) {
+                    calculatedRollsPageDisplay.textContent = "Выберите обои";
+                    wallpaperDetailsDisplay.innerHTML = '';
+                    return;
+                }
+
+                if (product.rollLength && product.rollWidth && product.rapportHeight) {
+                    const rollsNeeded = calculateWallpaperRolls(roomLength, roomWidth, roomHeight, windowArea, product.rollLength, product.rollWidth, product.rapportHeight);
+                    calculatedRollsPageDisplay.textContent = rollsNeeded;
+
+                    wallpaperDetailsDisplay.innerHTML = `
+                        <h4>${product.name}</h4>
+                        <p><strong>Размеры рулона:</strong> ${product.rollLength}м x ${product.rollWidth}м</p>
+                        <p><strong>Раппорт:</strong> ${product.rapportHeight}м</p>
+                        <p><strong>Материал:</strong> ${product.material}</p>
+                        <p><strong>Цвет:</strong> ${product.color}</p>
+                        <p><strong>Стиль:</strong> ${product.style}</p>
+                    `;
+                } else {
+                    calculatedRollsPageDisplay.textContent = "Нет данных";
+                    wallpaperDetailsDisplay.innerHTML = `<h4>${product.name}</h4><p>Недостаточно данных для расчета.</p>`;
+                }
+            }
+
+            function initializeCalculatorPage() {
+                if (calculatorSelectProduct) {
+                    allProducts.forEach(product => {
+                        const option = document.createElement('option');
+                        option.value = product.name;
+                        option.textContent = product.name;
+                        calculatorSelectProduct.appendChild(option);
+                    });
+
+                    calculatorSelectProduct.addEventListener('change', (event) => {
+                        const selectedProductName = event.target.value;
+                        const selectedProduct = allProducts.find(p => p.name === selectedProductName);
+                        updateCalculatorPageResult(selectedProduct);
+                    });
+                }
+
+                if (calcRoomLengthInput) calcRoomLengthInput.addEventListener('input', () => {
+                    const selectedProductName = calculatorSelectProduct ? calculatorSelectProduct.value : null;
+                    const selectedProduct = allProducts.find(p => p.name === selectedProductName);
+                    updateCalculatorPageResult(selectedProduct);
+                });
+                if (calcRoomWidthInput) calcRoomWidthInput.addEventListener('input', () => {
+                    const selectedProductName = calculatorSelectProduct ? calculatorSelectProduct.value : null;
+                    const selectedProduct = allProducts.find(p => p.name === selectedProductName);
+                    updateCalculatorPageResult(selectedProduct);
+                });
+                if (calcRoomHeightInput) calcRoomHeightInput.addEventListener('input', () => {
+                    const selectedProductName = calculatorSelectProduct ? calculatorSelectProduct.value : null;
+                    const selectedProduct = allProducts.find(p => p.name === selectedProductName);
+                    updateCalculatorPageResult(selectedProduct);
+                });
+                if (calcWindowAreaInput) calcWindowAreaInput.addEventListener('input', () => {
+                    const selectedProductName = calculatorSelectProduct ? calculatorSelectProduct.value : null;
+                    const selectedProduct = allProducts.find(p => p.name === selectedProductName);
+                    updateCalculatorPageResult(selectedProduct);
+                });
+
+                if (fullCalculateButton) {
+                    fullCalculateButton.addEventListener('click', () => {
+                        const selectedProductName = calculatorSelectProduct ? calculatorSelectProduct.value : null;
+                        const selectedProduct = allProducts.find(p => p.name === selectedProductName);
+                        updateCalculatorPageResult(selectedProduct);
+                    });
+                }
+            }
+
+
+            function updateCart() {
+                cartItemsContainer.innerHTML = '';
+
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('cart-item');
+                    itemElement.innerHTML = `
+                        <div class="cart-item-details">
+                            <span>${item.name}</span><br>
+                            <span>${item.price} руб</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-button minus" data-name="${item.name}">–</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="quantity-button plus" data-name="${item.name}">+</button>
+                        </div>
+                        <span class="cart-item-price">- ${(item.price * item.quantity).toFixed(2)} руб</span>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                totalElement.textContent = `Итого: ${total.toFixed(2)} руб`;
+                checkoutButton.textContent = `Оформить заказ • ${total.toFixed(2)} руб`;
+
+                totalElement.style.display = cart.length > 0 ? 'block' : 'none';
+
+                cartItemsContainer.querySelectorAll('.quantity-button').forEach(button => {
+                    button.addEventListener('click', e => {
+                        const name = button.dataset.name;
+                        if (button.classList.contains('plus')) {
+                            addToCart(name, cart.find(i => i.name === name).price);
+                        } else if (button.classList.contains('minus')) {
+                            removeFromCart(name);
+                        }
+                    });
+                });
+                saveCart();
+            }
+
+            function addToCart(productName, productPrice) {
+                const item = cart.find(i => i.name === productName);
+                if (item) {
+                    item.quantity++;
+                } else {
+                    cart.push({ name: productName, price: productPrice, quantity: 1 });
+                }
+                updateCart();
+                updateProductQuantityOnPage(productName);
+                updateModalQuantity(productName);
+                
+                // Показываем уведомление
+                showToast(`"${productName}" добавлен в корзину`, 'success');
+            }
+
+            function removeFromCart(productName) {
+                const item = cart.find(i => i.name === productName);
+                if (item && item.quantity > 0) {
+                    item.quantity--;
+                    if (item.quantity === 0) {
+                        cart = cart.filter(i => i.name !== productName);
+                    }
+                }
+                updateCart();
+                updateProductQuantityOnPage(productName);
+                updateModalQuantity(productName);
+
+                showToast(`"${productName}" удален из корзины`, 'info');
+            }
+
+            function updateProductQuantityOnPage(productName) {
+                const productElement = Array.from(productsContainer.children).find(product => 
+                    product.querySelector('.add-to-cart')?.dataset.name === productName
+                );
+                
+                if (productElement) {
+                    const qtyElement = productElement.querySelector('.quantity');
+                    const item = cart.find(i => i.name === productName);
+                    qtyElement.textContent = item ? item.quantity : 0;
+                }
+            }
+
+            function updateModalQuantity(productName) {
+                const item = cart.find(i => i.name === productName);
+                if (modalQuantitySpan && modalAddToCartDiv.dataset.name === productName) {
+                    modalQuantitySpan.textContent = item ? item.quantity : 0;
+                }
+            }
+
+            function showToast(message, type = 'info') {
+                const bgColor = type === 'success' 
+                    ? 'linear-gradient(to right, #00b09b, #96c93d)'
+                    : type === 'error' 
+                        ? 'linear-gradient(to right, #f5222d, #ff4d4f)'
+                        : 'linear-gradient(to right, #00b09b, #96c93d)';
+                
+                Toastify({
+                    text: message,
+                    duration: 2000,
+                    gravity: 'top',
+                    position: 'right',
+                    backgroundColor: bgColor,
+                    stopOnFocus: true
+                }).showToast();
+            }
+
+            function saveCart() {
+                localStorage.setItem('cart', JSON.stringify({
+                    items: cart,
+                }));
+            }
+            
+            function loadCart() {
+                const storedCart = localStorage.getItem('cart');
+                if (storedCart) {
+                    const cartData = JSON.parse(storedCart);
+                    cart = cartData.items || [];
+                    updateCart();
+
+                    cart.forEach(item => {
+                        updateProductQuantityOnPage(item.name); 
+                    });
+                }
+            }
+
+            function toggleProductDetails(event) {
+                const toggleButton = event.target;
+                const productElement = toggleButton.closest('.product'); 
+                const detailsContent = productElement.querySelector('.product-details-content');
+
+                if (detailsContent.style.display === 'block' || detailsContent.style.display === '') {
+                    detailsContent.style.display = 'none';
+                    toggleButton.textContent = 'Подробнее'; 
+                    toggleButton.style.color = '#3498db';
+                } else {
+                    detailsContent.style.display = 'block';
+                    toggleButton.textContent = 'Скрыть'; 
+                    toggleButton.style.color = '#e74c3c';
+                }
+            }
+
+            function attachDetailsToggleListeners() {
+                document.querySelectorAll('.details-toggle-btn').forEach(button => {
+                    button.removeEventListener('click', toggleProductDetails); 
+                    button.addEventListener('click', toggleProductDetails);
+                });
+            }
+
+            // --- Обновленная функция displayProducts ---
+            function displayProducts(productsToDisplay) {
+                productsContainer.innerHTML = '';
+
+                if (productsToDisplay.length === 0) {
+                    productsContainer.innerHTML = '<p>Товаров не найдено по вашим критериям.</p>';
+                    return;
+                }
+
+                productsToDisplay.forEach(product => {
+                    const productElement = document.createElement('div');
+                    productElement.classList.add('product');
+
+                    productElement.innerHTML = `
+                        <img src="${product.image}" loading="lazy" alt="${product.name}">
+                        <h3 class="prod_name">${product.name}</h3>
+                        <p class="desc_prod">${product.description}</p>
+                        <p class="cost">${product.price} руб/шт</p>
+                        
+                        <div class="add-to-cart" data-name="${product.name}" data-price="${product.price}">
+                            <button class="minus" data-name="${product.name}">–</button>
+                            <span class="quantity">0</span>
+                            <button class="plus" data-name="${product.name}">+</button>
+                        </div>
+                        <button class="details-open-btn" data-product-name="${product.name}">Подробнее</button>
+                    `;
+                    productsContainer.appendChild(productElement);
+                });
+
+                attachEventListenersToProductButtons();
+            }
+
+            function attachEventListenersToProductButtons() {
+                document.querySelectorAll('.add-to-cart').forEach(addToCartDiv => {
+                    const productName = addToCartDiv.dataset.name;
+                    const productPrice = +addToCartDiv.dataset.price; 
+
+                    const minusButton = addToCartDiv.querySelector('.minus');
+                    const plusButton = addToCartDiv.querySelector('.plus');
+                    const quantitySpan = addToCartDiv.querySelector('.quantity');
+
+                    const itemInCart = cart.find(item => item.name === productName);
+                    if (itemInCart) {
+                        quantitySpan.textContent = itemInCart.quantity;
+                    } else {
+                        quantitySpan.textContent = 0;
+                    }
+
+                    minusButton.removeEventListener('click', () => removeFromCart(productName));
+                    plusButton.removeEventListener('click', () => addToCart(productName, productPrice));
+
+                    minusButton.addEventListener('click', () => removeFromCart(productName));
+                    plusButton.addEventListener('click', () => addToCart(productName, productPrice));
+                });
+            }
+
+            function applyFilters() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const priceRange = priceFilter.value;
+                const selectedMaterial = materialFilter.value;
+                const selectedManufacturer = manufacturerFilter.value;
+
+                const filteredProducts = allProducts.filter(product => {
+                    const matchesSearch = product.name.toLowerCase().includes(searchTerm);
+                    
+                    let matchesManufacturer = true;
+                    if (selectedManufacturer !== 'all') {
+                        matchesManufacturer = product.manufacturer === selectedManufacturer;
+                    }
+
+                    let matchesMaterial = true;
+                    if (selectedMaterial !== 'all') {
+                        matchesMaterial = product.material === selectedMaterial;
+                    }
+
+                    let matchesPrice = true;
+                    if (priceRange !== 'all') {
+                        const [minPrice, maxPrice] = priceRange.split('-').map(Number);
+                        if (maxPrice === undefined) {
+                            matchesPrice = product.price >= minPrice;
+                        } else {
+                            matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+                        }
+                    }
+                    return matchesSearch && matchesPrice && matchesMaterial && matchesManufacturer;
+                });
+
+                displayProducts(filteredProducts);
+            }
+
+            async function loadProducts() {
+                try {
+                    const response = await fetch('products.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const productsData = await response.json();
+                    allProducts = productsData; 
+
+                    displayProducts(allProducts); 
+                    loadCart(); 
+
+                    searchInput.addEventListener('input', applyFilters);
+                    priceFilter.addEventListener('change', applyFilters);
+                    materialFilter.addEventListener('change', applyFilters);
+                    manufacturerFilter.addEventListener('change', applyFilters);
+
+                    if (calculatorPageSection) {
+                        initializeCalculatorPage(); 
+                    }
+                    
+                } catch (error) {
+                    console.error('Ошибка загрузки данных:', error);
+                    productsContainer.textContent = 'Не удалось загрузить товары. Проверьте консоль для деталей.';
+                }
+            }
+
+            cartButton.addEventListener('click', () => {
+                cartElement.classList.add('open');
+                cartButton.classList.add('hidden');
+            });
+            
+            cartCloseButton.addEventListener('click', () => {
+                cartElement.classList.remove('open');
+                cartButton.classList.remove('hidden');
+            });
+
+            function showCheckout() {
+                checkoutSection.classList.remove('hidden');
+                cartElement.classList.remove('open');
+
+                checkoutSection.scrollIntoView({ behavior: 'smooth' });
+
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                checkoutTotalSpan.textContent = total.toFixed(2) + ' руб';
+
+                if (cart.length > 0) {
+                    if (!deliveryMethodSelect.value) {
+                        deliveryMethodSelect.value = 'pickup';
+                    }
+                    deliveryMethodSelect.dispatchEvent(new Event('change')); 
+                } else {
+                    checkoutButton.disabled = true;
+                    checkoutButton.textContent = "Корзина пуста";
+                }
+            }
+
+            function hideCheckout() {
+                checkoutSection.classList.add('hidden');
+                cartElement.classList.add('open');
+                cartButton.classList.add('hidden');
+                orderForm.reset();
+                deliveryAddressGroup.style.display = 'none';
+            }
+
+            checkoutButton.addEventListener('click', showCheckout);
+            cancelButton.addEventListener('click', hideCheckout);
+
+            deliveryMethodSelect.addEventListener('change', () => {
+                const selectedDelivery = deliveryMethodSelect.value;
+                if (selectedDelivery === 'courier' || selectedDelivery === 'почта') {
+                    deliveryAddressGroup.style.display = 'block';
+                } else {
+                    deliveryAddressGroup.style.display = 'none';
+                    deliveryAddressInput.value = '';
+                }
+            });
+
+            orderForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                if (!customerNameInput.value || !customerEmailInput.value || !customerPhoneInput.value || !deliveryMethodSelect.value || !paymentMethodSelect.value) {
+                    Toastify({
+                        text: "Пожалуйста, заполните все обязательные поля.",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "linear-gradient(to right, #ff9a00, #feca01)",
+                        stopOnFocus: true
+                    }).showToast();
+                    return;
+                }
+                if ((deliveryMethodSelect.value === 'courier' || deliveryMethodSelect.value === 'почта') && !deliveryAddressInput.value) {
+                    Toastify({
+                        text: "Пожалуйста, укажите адрес доставки.",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "linear-gradient(to right, #ff9a00, #feca01)",
+                        stopOnFocus: true
+                    }).showToast();
+                    return;
+                }
+
+                const orderData = {
+                    customer: {
+                        name: customerNameInput.value,
+                        email: customerEmailInput.value,
+                        phone: customerPhoneInput.value
+                    },
+                    delivery: {
+                        method: deliveryMethodSelect.value,
+                        address: deliveryAddressInput.value 
+                    },
+                    payment: {
+                        method: paymentMethodSelect.value
+                    },
+                    comment: orderCommentTextarea.value,
+                    items: cart, 
+                    total: parseFloat(checkoutTotalSpan.textContent.split(' ')[2])
+                };
+
+                console.log('Данные заказа:', orderData); 
+
+                emailjs.send('service_kp6t6b9', 'template_order_id', { 
+                    to_name: "Администратор",
+                    from_name: orderData.customer.name,
+                    from_email: orderData.customer.email,
+                    customer_phone: orderData.customer.phone,
+                    delivery_method: orderData.delivery.method === 'pickup' ? 'Самовывоз' : (orderData.delivery.method === 'courier' ? 'Курьер' : 'Почта'),
+                    delivery_address: orderData.delivery.address || 'Не указан',
+                    payment_method: orderData.payment.method === 'online' ? 'Онлайн-оплата' : 'Оплата при получении',
+                    order_comment: orderData.comment || 'Нет',
+                    order_items: orderData.items.map(item => `${item.name} (x${item.quantity}) - ${(item.price * item.quantity).toFixed(2)} руб`).join('\n'),
+                    order_total: orderData.total.toFixed(2)
+                })
+                .then(function() {
+                    Toastify({
+                        text: "Спасибо за ваш заказ! Мы скоро с вами свяжемся.",
+                        duration: 5000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                        stopOnFocus: true
+                    }).showToast();
+
+                    cart = [];
+                    saveCart();
+                    updateCart();
+
+                    cartButton.classList.remove('hidden');
+
+                }, function(error) {
+                    Toastify({
+                        text: "Ошибка отправки заказа. Попробуйте позже.",
+                        duration: 5000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "linear-gradient(to right, #f5222d, #ff4d4f)",
+                        stopOnFocus: true
+                    }).showToast();
+                    console.error('Ошибка отправки заказа:', error);
+                });
+
+            });
+
+            loadProducts();
+
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    if (typeof recommendationClient !== 'undefined') {
+                        recommendationClient.displayPopularItems('popular-items-container', 'Популярные обои');
+
+                        recommendationClient.displayRecommendations('recommendations-container', 'Рекомендовано для вас');
+                    }
+                }, 1000);
+            });
+        </script>
+
+    </body>
+</html>
