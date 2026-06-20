@@ -62,7 +62,10 @@ def check_data_files():
     required_files = [
         "products.json",
         "main.py",
-        "recommenders.py",
+        "hybrid_recommender.py",
+        "item_based_cf.py",
+        "als_recommender.py",
+        "content_based.py",
         "data_preprocessor.py",
         "recommendations.js",
         "intmag.html"
@@ -184,8 +187,11 @@ GET /recommendations/popular
 POST /interactions/track
   Отследить взаимодействие пользователя
 
-GET /user/{user_id}/history
-  Получить историю пользователя
+GET /categories
+  Получить список категорий
+
+GET /products/{product_id}
+  Получить информацию о товаре
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 

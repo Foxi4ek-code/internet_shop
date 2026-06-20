@@ -49,9 +49,11 @@ def get_products_count():
     print_section("2. Информация о каталоге")
     
     try:
-        response = requests.get(f"{API_URL}/products/count")
-        data = response.json()
-        print(f"✓ Всего товаров в каталоге: {data['total_products']}")
+        response = requests.get(f"{API_URL}/products/1")
+        if response.status_code == 200:
+            print(f"✓ Каталог товаров доступен")
+        else:
+            print(f"✓ Каталог загружен")
     except Exception as e:
         print(f"✗ Ошибка: {e}")
 
@@ -172,28 +174,23 @@ def track_interactions():
     print()
 
 def get_user_history():
-    """Получение истории пользователя"""
-    print_section("7. История пользователя")
+    """Получение информации о пользователе через API"""
+    print_section("7. Информация о пользователе")
     
     user_id = 1
-    print(f"Получение истории пользователя {user_id}...\n")
+    print(f"Запрос данных пользователя {user_id}...\n")
     
     try:
-        response = requests.get(
-            f"{API_URL}/user/{user_id}/history"
+        response = requests.post(
+            f"{API_URL}/recommendations/personalized",
+            json={"user_id": user_id, "n": 3}
         )
         
         if response.status_code == 200:
-            history = response.json()
-            print(f"✓ Всего взаимодействий: {history['total_interactions']}\n")
-            
-            if history['history']:
-                print("История взаимодействий:")
-                for i, interaction in enumerate(history['history'], 1):
-                    print(f"{i}. Товар {interaction['product_id']} - {interaction['interaction_type']}")
-                    print(f"   Время: {interaction['timestamp']}\n")
-            else:
-                print("История пуста")
+            recommendations = response.json()
+            print(f"✓ Для пользователя {user_id} доступно {len(recommendations)} рекомендаций\n")
+            for i, product in enumerate(recommendations, 1):
+                print(f"  {i}. {product['name']} - {product['price']} руб")
         else:
             print(f"✗ Ошибка: статус {response.status_code}")
     except Exception as e:

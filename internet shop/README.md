@@ -40,9 +40,13 @@ python main.py
 ├── products.json            — Каталог товаров (22 позиции)
 ├── recommendations.js       — Клиентская библиотека для API рекомендаций
 ├── main.py                  — FastAPI сервер рекомендаций
-├── recommenders.py          — Модели рекомендаций (ALS, ItemCF, Content, Hybrid)
+├── hybrid_recommender.py    — Гибридная модель (ALS + ItemCF + Content)
+├── item_based_cf.py         — Коллаборативная фильтрация (Item-based CF)
+├── als_recommender.py       — ALS матричная факторизация
+├── content_based.py         — Контентная фильтрация
 ├── data_preprocessor.py     — Предобработка данных
-├── evaluator.py             — Оценка качества моделей
+├── generate_data.py         — Генерация синтетических данных
+├── evaluate_models.py       — Оценка качества моделей
 ├── models/
 │   └── hybrid_recommender.pkl — Сохранённая модель (создаётся автоматически)
 ├── products/                — Изображения товаров
@@ -56,17 +60,17 @@ python main.py
 | Метод | Путь | Описание |
 |---|---|---|
 | GET | `/` | Статус API |
-| GET | `/products/count` | Количество товаров |
 | POST | `/recommendations/personalized` | Персонализированные рекомендации |
 | POST | `/recommendations/similar` | Похожие товары |
 | GET | `/recommendations/popular?n=10&category_id=` | Популярные товары |
 | POST | `/interactions/track` | Отслеживание действий пользователя |
-| GET | `/user/{user_id}/history` | История пользователя |
+| GET | `/categories` | Список категорий |
+| GET | `/products/{product_id}` | Информация о товаре |
 
 ## Оценка качества
 
 ```bash
-python evaluator.py
+python evaluate_models.py
 ```
 
 Результаты включают Precision@10, Recall@10, NDCG@10, Coverage, Novelty, Diversity и производительность.
